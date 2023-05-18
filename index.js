@@ -1,7 +1,7 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const cors = require("cors");
 require("dotenv").config();
 
 const port = process.env.PORT || 5000;
@@ -9,9 +9,6 @@ const port = process.env.PORT || 5000;
 //middleware
 app.use(cors());
 app.use(express.json());
-
-
-
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.hxpxamt.mongodb.net/?retryWrites=true&w=majority`;
@@ -28,7 +25,15 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
+
+    const toyCollection = client.db("toyWorld").collection("toys");
+
+    app.get("/toys", async (req, res) => {
+      const result = await toyCollection.find().toArray();
+      res.send(result);
+    })
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
@@ -40,8 +45,6 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
-
 
 
 
