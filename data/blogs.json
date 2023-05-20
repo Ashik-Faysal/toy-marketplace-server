@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "question": "What is an access token and refresh token? How do they work and where should we store them on the client-side?",
+    "answer": "Access tokens and refresh tokens are credentials used for authentication and authorization in client-server interactions.An access token is a short-lived token included in API requests. It proves the client's authorization to access specific resources on a server. <br/>  A refresh token is a long-lived token that maintains the user's authentication session. When an access token expires, the refresh token can be used to obtain a new access token without the need for constant reauthentication. Access tokens should be stored securely on the client-side. For web applications, it is recommended to store them in HTTP-only cookies with secure settings. Mobile applications should utilize secure storage provided by the operating system. Single-page applications can store tokens in memory, but proper security measures must be implemented to protect against cross-site scripting (XSS) attacks. "
+  },
+  {
+    "id": 2,
+    "question": "Compare SQL and NoSQL databases?",
+    "answer": "SQL databases are based on a relational data model that organizes data into tables with predefined schemas. They are suitable for structured and consistent data, support ACID properties (Atomicity, Consistency, Isolation, Durability), and utilize structured query language (SQL) for data manipulation and retrieval. SQL databases provide strong data consistency and integrity, making them suitable for handling complex queries and relationships between data. Examples of SQL databases include MySQL, PostgreSQL, and Oracle. <br/> On the other hand, NoSQL databases have a non-relational data model with a flexible schema design. They are suitable for unstructured and rapidly changing data. NoSQL databases emphasize scalability and high performance and support eventual consistency and flexible data models. They are commonly used in scenarios where there is a need for handling large amounts of data with varying structures. Examples of NoSQL databases include MongoDB, Cassandra, Redis, and Elasticsearch."
+  },
+  {
+    "id": 3,
+    "question": "What is express js? What is Nest JS?",
+    "answer": "Express.js: Minimalist web application framework for Node.js that provides functions and utilities to handle HTTP requests and responses. It follows a middleware architecture and has a large ecosystem of plugins and extensions. <br/> NestJS: Progressive Node.js framework built on top of Express.js, using TypeScript. It provides a structured and scalable approach to building server-side applications, incorporating decorators, dependency injection, and modules. It offers built-in support for features like routing, validation, authentication, and caching."
+  },
+  {
+    "id": 4,
+    "question": "What is MongoDB aggregate and how does it work?",
+    "answer": "The `aggregate` method in MongoDB is used for complex data aggregation operations. It takes an array of stages as input and applies operations like filtering, grouping, sorting, and computing aggregations on collections. It returns a cursor object that allows you to iterate over the aggregated results."
+  }
+]
