@@ -29,6 +29,8 @@ async function run() {
 
     const toyCollection = client.db("toyWorld").collection("toys");
 
+    const myCollection = client.db("toyWorld").collection("myToys");
+
     app.get("/toys", async (req, res) => {
       const result = await toyCollection.find().limit(20).toArray();
       res.send(result);
@@ -46,14 +48,25 @@ async function run() {
       }
     });
 
-    app.post("/toys", async (req, res) => {
+app.get("/my-toys", async (req, res) => {
+  console.log(req.query.email);
+  let query = {};
+  if (req.query?.email) {
+    query = { email: req.query.email };
+  }
+  const result = await myCollection.find(query).toArray();
+  res.send(result);
+});
+
+
+    app.post("/my-toys", async (req, res) => {
       const newToys = req.body;
       console.log(newToys);
-      const result = await toyCollection.insertOne(newToys);
+      const result = await myCollection.insertOne(newToys);
       res.send(result);
     });
 
-    app.patch("/toys/:id", async (req, res) => {
+    app.patch("/my-toys/:id", async (req, res) => {
       const id = req.params.id;
       const filter = { _id: new ObjectId(id) };
       const updatedToys = req.body;
@@ -63,14 +76,14 @@ async function run() {
           status: updatedToys.status,
         },
       };
-      const result = await toyCollection.updateOne(filter, updateDoc);
+      const result = await myCollection.updateOne(filter, updateDoc);
       res.send(result);
     });
 
-    app.delete("/toys/:id", async (req, res) => {
+    app.delete("/my-toys/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const result = await toyCollection.deleteOne(query);
+      const result = await myCollection.deleteOne(query);
       res.send(result);
     });
 
